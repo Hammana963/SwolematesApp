@@ -13,12 +13,12 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
-import 'package:swolematesflutterapp/auth_page.dart';
-import 'package:swolematesflutterapp/calendar_screen.dart';
-import 'login_page.dart';
+import 'package:swolematesflutterapp/pages/auth_page.dart';
+import 'package:swolematesflutterapp/pages/calendar_page.dart';
+import 'pages/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'calendar_box.dart';
+import 'firebase/firebase_options.dart';
+import 'components/calendar_box.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
           child: Center
             (child: Text(
-              "Logged in as: " + user.email!,
+              "Logged in as: ${user.email!}",
             style: TextStyle(
               fontSize: 20,
             ),
