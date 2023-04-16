@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "942518724816",
+    "project_id": "swolemates-app",
+    "storage_bucket": "swolemates-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942518724816:android:1554a0f50c0a78a21816d5",
+        "android_client_info": {
+          "package_name": "com.swolemates.swolematesflutterapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942518724816-ugi030iad3eakdam699hsdfp374io9op.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIpQJPaNqIzja-k54KhycV2XTiBblpGI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "942518724816-ugi030iad3eakdam699hsdfp374io9op.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
