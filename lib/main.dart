@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:swolematesflutterapp/auth_page.dart';
 import 'package:swolematesflutterapp/calendar_screen.dart';
 import 'login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,15 +36,10 @@ class SwolematesApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: CalendarPage(),
+    return const MaterialApp(
+      home: AuthPage(),
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.white,
-        // scaffoldBackgroundColor: Colors.grey[300],
-        appBarTheme: const AppBarTheme(elevation: 2),
-        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white),
-      ),
+
       // TODO: Add a theme (103)
     );
   }
