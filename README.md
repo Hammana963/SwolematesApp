@@ -1,16 +1,9 @@
 # swolematesflutterapp
 
-A new Flutter project.
+Introducing Swolemates, the app that helps you find your perfect workout partner! Tired of sweating alone while everyone else at the gym looks like they're having a blast? With Swolemates, you can finally find someone to share the pain, and the gains with.
 
-## Getting Started
+Just create your profile, including your gym location and fitness goals, and swipe through potential workout partners in your area. You can even filter by workout type, so you can find someone who shares your love of burpees or your hate of leg day.
 
-This project is a starting point for a Flutter application.
+Plus, with our built-in chat feature, you can plan your workouts together, share fitness tips, or just commiserate about how sore you are after your last session.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Say goodbye to boring solo workouts and hello to a whole new level of gym fun with Swolemates! Download now and start swiping.
