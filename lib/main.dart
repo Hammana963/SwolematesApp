@@ -15,6 +15,7 @@
 import 'package:flutter/material.dart';
 import 'package:swolematesflutterapp/pages/auth_page.dart';
 import 'package:swolematesflutterapp/pages/calendar_page.dart';
+import 'package:swolematesflutterapp/pages/register_page.dart';
 import 'pages/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase/firebase_options.dart';
