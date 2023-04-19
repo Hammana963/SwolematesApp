@@ -10,7 +10,7 @@ class GoogleSignInButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 25),
       decoration: BoxDecoration(
         color: Colors.black,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(50),
       ),
       child: Center(
         child: Row(

@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:swolematesflutterapp/components/my_button.dart';
 import '../components/calendar_box.dart';
 
 class CalendarPage extends StatefulWidget {
@@ -23,6 +24,24 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
+  // final key = GlobalKey();
+  // final Set<_Foo> _trackTaped = Set<_Foo>();
+  //
+  // _detectTapedItem(PointerEvent event) {
+  //   final RenderBox box = key.currentContext.findRenderObject();
+  //   final result = BoxHitTestResult();
+  //   Offset local = box.globalToLocal(event.position);
+  //   if (box.hitTest(result, position: local)) {
+  //     for (final hit in result.path) {
+  //       /// temporary variable so that the [is] allows access of [index]
+  //       final target = hit.target;
+  //       if (target is _Foo && !_trackTaped.contains(target)) {
+  //         _trackTaped.add(target);
+  //         _selectIndex(target.index);
+  //       }
+  //     }
+  //   }
+  // }
   var boxStatus = [];
 
   final int calendarBoxCount = 7 * 18;
@@ -77,11 +96,18 @@ class _CalendarPageState extends State<CalendarPage> {
                     children: const [
                       Text(
                         "When can you",
-                        style: TextStyle(fontSize: 30),
+                        style: TextStyle(
+                            fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+
                       ),
                       Text(
                         "Go to the gym?",
-                        style: TextStyle(fontSize: 30),
+                        style: TextStyle(
+                            fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       SizedBox(height: 20.0),
                       Text(
@@ -211,35 +237,38 @@ class _CalendarPageState extends State<CalendarPage> {
                         SizedBox(width: 15),
                       ],
                     ),
-                    SizedBox(
-                      width: 290,
-                      height: 415,
-                      child: GridView.builder(
-                          padding: EdgeInsets.zero,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: calendarBoxCount,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            mainAxisSpacing: 0,
-                            crossAxisSpacing: 0,
-                            crossAxisCount: calendarBoxInEachRow,
-                            childAspectRatio: (20 / 10),
-                          ),
-                          itemBuilder: (context, index) {
-                            return CalendarBox(
-                              child: index,
-                              selected: boxStatus[index],
-                              function: () {
-                                //pointer detected on box turns box green
-                                selectBox(index);
-                              },
-                            );
-                          }),
+                    Listener(
+                      child: SizedBox(
+                        width: 290,
+                        height: 415,
+                        child: GridView.builder(
+                            padding: EdgeInsets.zero,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: calendarBoxCount,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              mainAxisSpacing: 0,
+                              crossAxisSpacing: 0,
+                              crossAxisCount: calendarBoxInEachRow,
+                              childAspectRatio: (20 / 10),
+                            ),
+                            itemBuilder: (context, index) {
+                              return CalendarBox(
+                                child: index,
+                                selected: boxStatus[index],
+                                function: () {
+                                  //pointer detected on box turns box green
+                                  selectBox(index);
+                                },
+                              );
+                            }),
+                      ),
                     ),
                   ],
                 ),
               ],
             ),
+            MyButton(onTap: () {}, text: "Confirm"),
           ],
         ),
       ),

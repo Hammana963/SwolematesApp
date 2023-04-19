@@ -15,6 +15,7 @@
 import 'package:flutter/material.dart';
 import 'package:swolematesflutterapp/pages/auth_page.dart';
 import 'package:swolematesflutterapp/pages/calendar_page.dart';
+import 'package:swolematesflutterapp/pages/get_first_name.dart';
 import 'package:swolematesflutterapp/pages/register_page.dart';
 import 'pages/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -40,7 +41,6 @@ class SwolematesApp extends StatelessWidget {
     return const MaterialApp(
       home: AuthPage(),
       debugShowCheckedModeBanner: false,
-
       // TODO: Add a theme (103)
     );
   }

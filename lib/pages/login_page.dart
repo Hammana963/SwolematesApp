@@ -5,7 +5,12 @@ import 'package:swolematesflutterapp/components/my_button.dart';
 import 'package:swolematesflutterapp/components/my_textfield.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  final Function()? onTap;
+
+  const LoginPage({
+    Key? key,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -17,7 +22,9 @@ class _LoginPageState extends State<LoginPage> {
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
 
+
   var signInStatus = "";
+
 
   void signUserIn() async {
     showDialog(
@@ -35,12 +42,14 @@ class _LoginPageState extends State<LoginPage> {
           password: passwordController.text
       );
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found' ||
-          e.code == 'wrong-password' ||
-          e.code == 'invalid-email') {
         //show error to user
-        wrongSignInMessage();
+      print(e.code);
+      if (e.code == "user-not-found") {
+        wrongSignInMessage("There is no user registered with this email.");
+      } else {
+        wrongSignInMessage(e.message);
       }
+
     }
     finally {
       Navigator.pop(context);
@@ -48,9 +57,9 @@ class _LoginPageState extends State<LoginPage> {
 
   }
 
-  void wrongSignInMessage() {
+  void wrongSignInMessage(errorMessage) {
     setState(() {
-      signInStatus = "Wrong email or password";
+      signInStatus = errorMessage;
     });
   }
 
@@ -75,22 +84,20 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(
                       fontSize: 36,
                       fontWeight: FontWeight.bold,
+                      // color: Color(0xFF1DB22C),
                     ),
                   ),
-                  // const Text(
-                  //   "Sign In",
-                  //   style: TextStyle(
-                  //     fontSize: 20,
-                  //   ),
-                  // ),
-                  const SizedBox(height: 30),
-                  // const SizedBox(height: 20),
 
-                  Text(
-                    signInStatus,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      color: Colors.red,
+                  const SizedBox(height: 30),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Text(
+                      signInStatus,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        color: Colors.red,
+                      ),
                     ),
                   ),
 
@@ -163,29 +170,34 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
 
-                  const SizedBox(height: 50),
+                  // const SizedBox(height: 50),
 
-                  const GoogleSignInButton(),
+                  // const GoogleSignInButton(),
 
                   const SizedBox(height: 25),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "Not a member?",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        " Register now",
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                    children: [
+                      // const Text(
+                      //   "Not a member?",
+                      //   style: TextStyle(
+                      //     fontWeight: FontWeight.bold,
+                      //   ),
+                      // ),
+                      // GestureDetector(
+                      //   onTap: widget.onTap,
+                      //   child: const Text(
+                      //     " Register now",
+                      //     style: TextStyle(
+                      //       color: Colors.blue,
+                      //       fontWeight: FontWeight.bold,
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
+                  const SizedBox(height: 25),
+                  MyButton(onTap: widget.onTap, text: "Register")
                 ],
               ),
             ),

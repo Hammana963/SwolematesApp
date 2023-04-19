@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:swolematesflutterapp/pages/calendar_page.dart';
 import 'package:swolematesflutterapp/pages/login_page.dart';
 import 'package:swolematesflutterapp/pages/register_page.dart';
 import 'home_page.dart';
+import 'login_or_register_page.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -17,7 +19,7 @@ class AuthPage extends StatelessWidget {
             return HomePage();
           }
           else {
-            return LoginPage();
+            return LoginOrRegisterPage();
           }
         }
       ),
