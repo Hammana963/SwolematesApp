@@ -97,7 +97,6 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-        backgroundColor: Colors.grey[300],
         body: SafeArea(
           child: Center(
             child: SingleChildScrollView(
@@ -209,6 +208,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   MyButton(
                     onTap: signUserUp,
                     text: "Register",
+                    color: Colors.black,
                   ),
 
                   // const SizedBox(height: 50),

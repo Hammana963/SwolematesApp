@@ -22,9 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
 
-
   var signInStatus = "";
-
 
   void signUserIn() async {
     showDialog(
@@ -38,23 +36,18 @@ class _LoginPageState extends State<LoginPage> {
     // try signing in
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text
-      );
+          email: emailController.text, password: passwordController.text);
     } on FirebaseAuthException catch (e) {
-        //show error to user
+      //show error to user
       print(e.code);
       if (e.code == "user-not-found") {
         wrongSignInMessage("There is no user registered with this email.");
       } else {
         wrongSignInMessage(e.message);
       }
-
-    }
-    finally {
+    } finally {
       Navigator.pop(context);
     }
-
   }
 
   void wrongSignInMessage(errorMessage) {
@@ -66,7 +59,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[300],
         body: SafeArea(
           child: Center(
             child: SingleChildScrollView(
@@ -127,14 +119,13 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
 
-
-
                   const SizedBox(height: 10),
 
-                 MyButton(
-                   onTap: signUserIn,
-                   text: "Log in",
-                 ),
+                  MyButton(
+                    onTap: signUserIn,
+                    text: "Log in",
+                    color: Colors.black,
+                  ),
 
                   const SizedBox(height: 50),
 
@@ -148,18 +139,14 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.grey[400],
                           ),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: Text(
                             "Or",
                             style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey[700]
-                            ),
+                                fontSize: 16, color: Colors.grey[700]),
                           ),
                         ),
-
                         Expanded(
                           child: Divider(
                             thickness: 1,
@@ -197,7 +184,11 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                   const SizedBox(height: 25),
-                  MyButton(onTap: widget.onTap, text: "Register")
+                  MyButton(
+                    onTap: widget.onTap,
+                    text: "Register",
+                    color: Colors.black,
+                  )
                 ],
               ),
             ),

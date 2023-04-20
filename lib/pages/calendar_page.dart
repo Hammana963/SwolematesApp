@@ -12,9 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:swolematesflutterapp/components/my_button.dart';
 import '../components/calendar_box.dart';
+import 'matches_page.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
@@ -24,24 +27,6 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
-  // final key = GlobalKey();
-  // final Set<_Foo> _trackTaped = Set<_Foo>();
-  //
-  // _detectTapedItem(PointerEvent event) {
-  //   final RenderBox box = key.currentContext.findRenderObject();
-  //   final result = BoxHitTestResult();
-  //   Offset local = box.globalToLocal(event.position);
-  //   if (box.hitTest(result, position: local)) {
-  //     for (final hit in result.path) {
-  //       /// temporary variable so that the [is] allows access of [index]
-  //       final target = hit.target;
-  //       if (target is _Foo && !_trackTaped.contains(target)) {
-  //         _trackTaped.add(target);
-  //         _selectIndex(target.index);
-  //       }
-  //     }
-  //   }
-  // }
   var boxStatus = [];
 
   final int calendarBoxCount = 7 * 18;
@@ -79,10 +64,17 @@ class _CalendarPageState extends State<CalendarPage> {
     return "$time $amOrpm";
   }
 
+  Future<void> uploadTimes() async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    final user = FirebaseAuth.instance.currentUser!;
+    final data = {"availableTimes": boxStatus};
+    final docRef = db.collection("users").doc(user.email);
+    final doc = await docRef.set(data, SetOptions(merge: true));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -97,15 +89,14 @@ class _CalendarPageState extends State<CalendarPage> {
                       Text(
                         "When can you",
                         style: TextStyle(
-                            fontSize: 30,
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
                         ),
-
                       ),
                       Text(
                         "Go to the gym?",
                         style: TextStyle(
-                            fontSize: 30,
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -268,7 +259,18 @@ class _CalendarPageState extends State<CalendarPage> {
                 ),
               ],
             ),
-            MyButton(onTap: () {}, text: "Confirm"),
+            MyButton(
+              onTap: () {
+                uploadTimes();
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context){
+                  return const MatchesPage();
+                }), (r){
+                  return false;
+                });
+              },
+              text: "Confirm",
+              color: Colors.black,
+            ),
           ],
         ),
       ),
