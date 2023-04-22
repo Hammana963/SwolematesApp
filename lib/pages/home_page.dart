@@ -9,16 +9,24 @@ import 'package:image_picker/image_picker.dart';
 import 'package:swolematesflutterapp/components/my_button.dart';
 import 'package:swolematesflutterapp/firebase/firestore_crud_functions.dart';
 import 'package:swolematesflutterapp/pages/calendar_page.dart';
+import 'package:swolematesflutterapp/pages/places_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
+
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    const FireStoreFunctions();
+    super.initState();
+  }
   FirebaseFirestore db = FirebaseFirestore.instance;
+
   final user = FirebaseAuth.instance.currentUser!;
   var imageFileName = "";
   late String profileFilePath;
@@ -119,12 +127,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        actions: [
-          IconButton(onPressed: signUserOut, icon: const Icon(Icons.logout))
-        ],
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.black,
+      //   actions: [
+      //     IconButton(onPressed: signUserOut, icon: const Icon(Icons.logout))
+      //   ],
+      // ),
       body: SafeArea(
           child: Center(
         child: Column(
@@ -173,40 +181,6 @@ class _HomePageState extends State<HomePage> {
                     )
                   : null,
             ),
-            // Image.file(File(profileFilePath))
-
-            // StreamBuilder(
-            //     stream: FirebaseFirestore.instance
-            //         .collection("users")
-            //         .doc(user.email)
-            //         .snapshots(),
-            //     builder: (context, snapshot) {
-            //       if (!snapshot.hasData) {
-            //         return const CircularProgressIndicator();
-            //       }
-            //       return FutureBuilder(
-            //           future: getImage(),
-            //           builder: (context, snapshot) {
-            //             if (!snapshot.hasData) {
-            //               // return const CircularProgressIndicator();
-            //               return const CircleAvatar(
-            //                 backgroundColor: Colors.grey,
-            //                 radius: 50,
-            //                 child: Icon(
-            //                   Icons.person,
-            //                   color: Colors.black,
-            //                   size: 40.0,
-            //                   semanticLabel: 'profile icon',
-            //                 ),
-            //               );
-            //             }
-            //             return CircleAvatar(
-            //               backgroundColor: Colors.grey,
-            //               radius: 50,
-            //               backgroundImage: NetworkImage(snapshot.data!),
-            //             );
-            //           });
-            //     }),
             const SizedBox(
               height: 40,
             ),
@@ -215,7 +189,7 @@ class _HomePageState extends State<HomePage> {
               text: "Select photo",
               color: Colors.black,
             ),
-            const SizedBox(height: 120),
+            const SizedBox(height: 160),
 
             //visible once the picture is selected
             Visibility(
@@ -224,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const CalendarPage()),
+                      MaterialPageRoute(builder: (context) => const PlacesPage()),
                     );
                   },
                   text: "Confirm",

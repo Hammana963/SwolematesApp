@@ -15,10 +15,11 @@ class FireStoreFunctions extends StatefulWidget {
 
 class _FireStoreFunctionsState extends State<FireStoreFunctions> {void uploadImage() async {
   FirebaseFirestore db = FirebaseFirestore.instance;
-  var imageFileName = "";
-  bool picSelected = false;
-  late String profileFilePath;
   final user = FirebaseAuth.instance.currentUser!;
+  var imageFileName = "";
+  late String profileFilePath;
+  bool picSelected = false;
+
 
 void uploadImage() async {
     ImagePicker imagePicker = ImagePicker();

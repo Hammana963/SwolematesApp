@@ -39,7 +39,6 @@ class _LoginPageState extends State<LoginPage> {
           email: emailController.text, password: passwordController.text);
     } on FirebaseAuthException catch (e) {
       //show error to user
-      print(e.code);
       if (e.code == "user-not-found") {
         wrongSignInMessage("There is no user registered with this email.");
       } else {

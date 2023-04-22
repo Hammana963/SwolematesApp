@@ -5,7 +5,7 @@ class CalendarBox extends StatelessWidget {
   bool selected;
   final function;
 
-  CalendarBox({this.child, required this.selected, this.function});
+  CalendarBox({super.key, this.child, required this.selected, this.function});
 
   @override
   Widget build(BuildContext context) {

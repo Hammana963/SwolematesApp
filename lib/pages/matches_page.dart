@@ -14,15 +14,19 @@ class _MatchesPageState extends State<MatchesPage> {
   void signUserOut() {
     FirebaseAuth.instance.signOut();
     //clears navigation history (push and remove until)
-    Navigator.pushAndRemoveUntil(context,
-        //transitions with no default animation
-        PageRouteBuilder(
-          pageBuilder: (context, animation1, animation2) => AuthPage(),
-          transitionDuration: Duration.zero,
-          reverseTransitionDuration: Duration.zero,
-        ), (r) {
-      return false;
-    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const AuthPage()),
+    );
+    // Navigator.pushAndRemoveUntil(context,
+    //     //transitions with no default animation
+    //     PageRouteBuilder(
+    //       pageBuilder: (context, animation1, animation2) => AuthPage(),
+    //       transitionDuration: Duration.zero,
+    //       reverseTransitionDuration: Duration.zero,
+    //     ), (r) {
+    //   return false;
+    // });
   }
 
   @override
