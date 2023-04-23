@@ -36,7 +36,6 @@ class _FilterPageState extends State<FilterPage> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,16 +91,16 @@ class _FilterPageState extends State<FilterPage> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: buttonCount,
                       itemBuilder: (BuildContext context, int index) {
-                       return Padding(
-                         padding: const EdgeInsets.symmetric(vertical: 8.0),
-                         child: FilterButton(
-                           selected: buttonSelected[index],
-                           function: () {
-                             selectButton(index);
-                           },
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: FilterButton(
+                            selected: buttonSelected[index],
+                            function: () {
+                              selectButton(index);
+                            },
                             index: index,
                           ),
-                       );
+                        );
                       },
                     ),
                   ),
@@ -109,25 +108,19 @@ class _FilterPageState extends State<FilterPage> {
               )
             ],
           ),
-
           const SizedBox(height: 100),
-
           Visibility(
               visible: buttonSelected.contains(true),
-              child: MyButton(
+              child: MyButton( //need TO UPLOAD BUTTON STATUS
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MatchesPage()),
-                  );
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/home', (route) => false);
                 },
                 text: "Confirm",
                 color: const Color(0xFF05861A),
               ))
         ],
-      )
-
-      ),
+      )),
     );
   }
 }

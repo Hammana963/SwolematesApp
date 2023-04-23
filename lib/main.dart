@@ -17,6 +17,9 @@ import 'package:swolematesflutterapp/pages/auth_page.dart';
 import 'package:swolematesflutterapp/pages/calendar_page.dart';
 import 'package:swolematesflutterapp/pages/filter_page.dart';
 import 'package:swolematesflutterapp/pages/get_first_name.dart';
+import 'package:swolematesflutterapp/pages/home_page.dart';
+import 'package:swolematesflutterapp/pages/profile_pic_page.dart';
+import 'package:swolematesflutterapp/pages/matches_page.dart';
 import 'package:swolematesflutterapp/pages/places_page.dart';
 import 'package:swolematesflutterapp/pages/register_page.dart';
 import 'pages/login_page.dart';
@@ -40,8 +43,18 @@ class SwolematesApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: AuthPage(),
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/': (context) => const AuthPage(),
+        '/profilePic': (context) => const ProfilePicPage(),
+        '/places': (context) => const PlacesPage(),
+        '/filter': (context) => const FilterPage(),
+        '/matches': (context) => const MatchesPage(),
+        '/home': (context) => const HomePage(),
+      },
+      // home: AuthPage(),
       debugShowCheckedModeBanner: false,
       // TODO: Add a theme (103)
     );

@@ -7,7 +7,6 @@ import 'package:swolematesflutterapp/config.dart';
 
 import '../components/my_button.dart';
 import 'filter_page.dart';
-// AIzaSyA1rspwCiKgi8w53Usw1vnGkI03BLl8yVw
 
 class PlacesPage extends StatefulWidget {
   const PlacesPage({Key? key}) : super(key: key);
@@ -47,6 +46,8 @@ class _PlacesPageState extends State<PlacesPage> {
 
     final docRef = db.collection("users").doc(user.email);
     final doc = await docRef.set(data, SetOptions(merge: true));
+
+
 
   }
 
@@ -90,10 +91,9 @@ class _PlacesPageState extends State<PlacesPage> {
                     child: MyButton(
                       onTap: () {
                         uploadPlace();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const FilterPage()),
-                        );
+                        // Navigator.pushNamed(context, '/filter');
+                        Navigator.pop(context);
+                        Navigator.pushReplacementNamed(context, "/home");
                       },
                       text: "Confirm",
                       color: const Color(0xFF05861A),

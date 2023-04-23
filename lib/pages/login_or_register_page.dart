@@ -3,7 +3,8 @@ import 'package:swolematesflutterapp/pages/login_page.dart';
 import 'package:swolematesflutterapp/pages/register_page.dart';
 
 class LoginOrRegisterPage extends StatefulWidget {
-  const LoginOrRegisterPage({Key? key}) : super(key: key);
+
+  const LoginOrRegisterPage({Key? key,}) : super(key: key);
 
   @override
   State<LoginOrRegisterPage> createState() => _LoginOrRegisterPageState();

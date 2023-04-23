@@ -9,6 +9,7 @@ import 'package:swolematesflutterapp/components/my_textfield.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
+
   const RegisterPage({Key? key, required this.onTap}) : super(key: key);
 
   @override
@@ -26,7 +27,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   var signInStatus = "";
 
-
   void signUserUp() async {
     showDialog(
       context: context,
@@ -36,27 +36,27 @@ class _RegisterPageState extends State<RegisterPage> {
         );
       },
     );
-    if (!passwordConfirmed()) {
+    if (!passwordConfirmed() || nameEmpty()) {
       Navigator.pop(context);
-      wrongSignInMessage("Passwords don't match");
+      if (nameEmpty()) {
+        wrongSignInMessage("Name must not be empty");
+      } else {
+        wrongSignInMessage("Passwords don't match");
+      }
       return;
     }
 
     // try signing in
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text
-      );
+          email: emailController.text, password: passwordController.text);
       addUserDetails();
+      // Navigator.pushNamed(context, "/profilePic");
     } on FirebaseAuthException catch (e) {
-
-        wrongSignInMessage(e.message);
-    }
-    finally {
+      wrongSignInMessage(e.message);
+    } finally {
       Navigator.pop(context);
     }
-
   }
 
   void addUserDetails() {
@@ -67,26 +67,31 @@ class _RegisterPageState extends State<RegisterPage> {
       "password": passwordController.text.trim(),
     };
 
-    db
-        .collection("users")
-        .doc(user["email"])
-        .set(user);
-    ;//.then((DocumentReference doc) =>
-        // print('DocumentSnapshot added with ID: ${doc.id}'));
+    db.collection("users").doc(user["email"]).set(user);
+    ; //.then((DocumentReference doc) =>
+    // print('DocumentSnapshot added with ID: ${doc.id}'));
   }
 
   void wrongSignInMessage(eMessage) {
     setState(() {
       signInStatus = eMessage;
     });
-
   }
+
   bool passwordConfirmed() {
-    if (passwordController.text.trim() == confirmPasswordController.text.trim() ? true : false) {
+    if (passwordController.text.trim() == confirmPasswordController.text.trim()
+        ? true
+        : false) {
       return true;
     } else {
       return false;
     }
+  }
+
+  bool nameEmpty() {
+    return (firstNameController.text.isEmpty || lastNameController.text.isEmpty)
+        ? true
+        : false;
   }
 
   String capitalizeFirstLetter(String str) {
@@ -95,185 +100,146 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         body: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
+      child: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.fitness_center_rounded,
+                size: 100,
+              ),
+              const SizedBox(height: 20),
+
+              const Text(
+                "Create an Account",
+                style: TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              // const Text(
+              //   "Sign In",
+              //   style: TextStyle(
+              //     fontSize: 20,
+              //   ),
+              // ),
+              const SizedBox(height: 30),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Text(
+                  signInStatus,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              MyTextField(
+                controller: firstNameController,
+                hintText: "First Name",
+                obscureText: false,
+                prefixIcon: const Icon(
+                  Icons.person,
+                  size: 24.0,
+                  semanticLabel: 'profile icon',
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              MyTextField(
+                controller: lastNameController,
+                hintText: "Last Name",
+                obscureText: false,
+                prefixIcon: const Icon(
+                  Icons.person,
+                  size: 24.0,
+                  semanticLabel: 'profile icon',
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              MyTextField(
+                controller: emailController,
+                hintText: "Email",
+                obscureText: false,
+                prefixIcon: const Icon(
+                  Icons.mail,
+                  size: 24.0,
+                  semanticLabel: 'email icon',
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              MyTextField(
+                controller: passwordController,
+                hintText: "Password",
+                obscureText: true,
+                prefixIcon: const Icon(
+                  Icons.lock,
+                  size: 24.0,
+                  semanticLabel: 'password icon',
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              MyTextField(
+                controller: confirmPasswordController,
+                hintText: "Confirm Password",
+                obscureText: true,
+                prefixIcon: const Icon(
+                  Icons.lock,
+                  size: 24.0,
+                  semanticLabel: 'password icon',
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              MyButton(
+                onTap: () {
+                  signUserUp();
+                },
+                text: "Register",
+                color: Colors.black,
+              ),
+
+              const SizedBox(height: 25),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
-                    Icons.fitness_center_rounded,
-                    size: 100,
-                  ),
-                  const SizedBox(height: 20),
-
                   const Text(
-                    "Create an Account",
+                    "Already have an account?",
                     style: TextStyle(
-                      fontSize: 36,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  // const Text(
-                  //   "Sign In",
-                  //   style: TextStyle(
-                  //     fontSize: 20,
-                  //   ),
-                  // ),
-                  const SizedBox(height: 30),
-
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Text(
-                      signInStatus,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        color: Colors.red,
+                  GestureDetector(
+                    onTap: widget.onTap,
+                    child: const Text(
+                      " Sign in",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-
-                  const SizedBox(height: 10),
-
-
-                  MyTextField(
-                    controller: firstNameController,
-                    hintText: "First Name",
-                    obscureText: false,
-                    prefixIcon: const Icon(
-                      Icons.person,
-                      size: 24.0,
-                      semanticLabel: 'profile icon',
-                    ),
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  MyTextField(
-                    controller: lastNameController,
-                    hintText: "Last Name",
-                    obscureText: false,
-                    prefixIcon: const Icon(
-                      Icons.person,
-                      size: 24.0,
-                      semanticLabel: 'profile icon',
-                    ),
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  MyTextField(
-                    controller: emailController,
-                    hintText: "Email",
-                    obscureText: false,
-                    prefixIcon: const Icon(
-                      Icons.mail,
-                      size: 24.0,
-                      semanticLabel: 'email icon',
-                    ),
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  MyTextField(
-                    controller: passwordController,
-                    hintText: "Password",
-                    obscureText: true,
-                    prefixIcon: const Icon(
-                      Icons.lock,
-                      size: 24.0,
-                      semanticLabel: 'password icon',
-                    ),
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  MyTextField(
-                    controller: confirmPasswordController,
-                    hintText: "Confirm Password",
-                    obscureText: true,
-                    prefixIcon: const Icon(
-                      Icons.lock,
-                      size: 24.0,
-                      semanticLabel: 'password icon',
-                    ),
-                  ),
-
-
-
-                  const SizedBox(height: 10),
-
-                  MyButton(
-                    onTap: signUserUp,
-                    text: "Register",
-                    color: Colors.black,
-                  ),
-
-                  // const SizedBox(height: 50),
-
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  //   child: Row(
-                  //     children: [
-                  //       Expanded(
-                  //         child: Divider(
-                  //           thickness: 1,
-                  //           color: Colors.grey[400],
-                  //         ),
-                  //       ),
-                  //
-                  //       Padding(
-                  //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  //         child: Text(
-                  //           "Or",
-                  //           style: TextStyle(
-                  //               fontSize: 16,
-                  //               color: Colors.grey[700]
-                  //           ),
-                  //         ),
-                  //       ),
-                  //
-                  //       Expanded(
-                  //         child: Divider(
-                  //           thickness: 1,
-                  //           color: Colors.grey[400],
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-
-                  // const SizedBox(height: 50),
-                  //
-
-                  const SizedBox(height: 25),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Already have an account?",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: widget.onTap,
-                        child: const Text(
-                          " Sign in",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
-            ),
+            ],
           ),
-        ));
+        ),
+      ),
+    ));
   }
 }
