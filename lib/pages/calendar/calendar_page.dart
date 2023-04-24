@@ -16,8 +16,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:swolematesflutterapp/components/my_button.dart';
-import '../components/calendar_box.dart';
-import 'matches_page.dart';
+import '../../components/calendar_box.dart';
+import '../matches/matches_page.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);

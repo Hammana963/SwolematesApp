@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:swolematesflutterapp/pages/calendar_page.dart';
-import 'package:swolematesflutterapp/pages/login_page.dart';
-import 'package:swolematesflutterapp/pages/register_page.dart';
-import 'home_page.dart';
-import 'profile_pic_page.dart';
+import 'package:swolematesflutterapp/pages/calendar/calendar_page.dart';
+import 'package:swolematesflutterapp/pages/auth/login_page.dart';
+import 'package:swolematesflutterapp/pages/auth/register_page.dart';
+import '../home_page.dart';
+import '../profile/profile_pic_page.dart';
 import 'login_or_register_page.dart';
 
 class AuthPage extends StatefulWidget {
@@ -59,7 +59,8 @@ class _AuthPageState extends State<AuthPage> {
                         return ProfilePicPage();
                       }
                     }
-                    return CircularProgressIndicator();
+                    // return const Center(child: CircularProgressIndicator());
+                    return const SizedBox.shrink();
                   });
             }
             else {

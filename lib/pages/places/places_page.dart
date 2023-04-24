@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_places_for_flutter/google_places_for_flutter.dart';
-import 'package:swolematesflutterapp/config.dart';
+import 'package:swolematesflutterapp/utils/config.dart';
 
-import '../components/my_button.dart';
-import 'filter_page.dart';
+import '../../components/my_button.dart';
+import '../filter/filter_page.dart';
 
 class PlacesPage extends StatefulWidget {
   const PlacesPage({Key? key}) : super(key: key);

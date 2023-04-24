@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:swolematesflutterapp/components/filter_button.dart';
 import 'package:swolematesflutterapp/components/my_button.dart';
 
-import 'matches_page.dart';
+import '../matches/matches_page.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({Key? key}) : super(key: key);

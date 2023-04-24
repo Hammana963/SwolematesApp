@@ -1,15 +1,11 @@
 import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:swolematesflutterapp/components/my_button.dart';
-import 'package:swolematesflutterapp/firebase/firestore_crud_functions.dart';
-import 'package:swolematesflutterapp/pages/calendar_page.dart';
-import 'package:swolematesflutterapp/pages/places_page.dart';
+
 
 class ProfilePicPage extends StatefulWidget {
   const ProfilePicPage({Key? key}) : super(key: key);
@@ -102,19 +98,6 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
     }
   }
 
-// Future<Image?> downloadImage() async {
-//   final storageRef = FirebaseStorage.instance.ref();
-//
-//   try {
-//     final imageRef = storageRef.child("images/$imageFileName");;
-//     const oneMegabyte = 1024 * 1024;
-//     final Uint8List? data = await imageRef.getData(oneMegabyte);
-//     return Image.memory(data!);
-//   } on FirebaseException catch (e) {
-//     // Handle any errors.
-//   }
-// }
-
   Future<String> getImage() async {
     final storageRef = FirebaseStorage.instance.ref();
     final imageRef = storageRef.child("images/$imageFileName");
@@ -190,7 +173,7 @@ class _ProfilePicPageState extends State<ProfilePicPage> {
               text: "Select photo",
               color: Colors.black,
             ),
-            const SizedBox(height: 160),
+            const SizedBox(height: 130),
 
             //visible once the picture is selected
             Visibility(
