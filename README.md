@@ -1,5 +1,12 @@
 # Swolemates
 
-Introducing Swolemates, the app that helps you find your perfect workout partner! With Swolemates, you can finally find someone to share the pain, and the gains with. Just create your profile, including your availability and fitness goals, and scroll through potential workout partners in your area. You can even filter by workout type, so you can find someone who shares your love of burpees or your hate of leg day.
+Implements a state management approach using the Provider package.
 
-<img width="369" alt="Screen Shot 2023-04-15 at 12 42 47 PM" src="https://user-images.githubusercontent.com/82621100/232336511-7f057391-601c-4b62-899a-8fe18f4cc63e.png">
+lib/main.dart
+Here the app sets up objects it needs to track state: a catalog and a shopping cart. It builds a MultiProvider to provide both objects at once to widgets further down the tree.
+
+lib/models/*
+This directory contains the model classes that are provided in main.dart. These classes represent the app state.
+
+lib/screens/*
+This directory contains widgets used to construct the screens of the app: the matches, profile, and chat page. These widgets have access to the current state of both the user data via ChangeNotifierProvider
